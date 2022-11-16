@@ -1,7 +1,5 @@
 HELP.md
 target/
-!src/main/java/ru/sorokin/exceptions/
-src/main/java/ru/sorokin/exceptions/*
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

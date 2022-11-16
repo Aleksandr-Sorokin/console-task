@@ -9,6 +9,7 @@ import ru.sorokin.entity.Criterias;
 import ru.sorokin.entity.Statistics;
 import ru.sorokin.enums.TypeRequest;
 import ru.sorokin.exceptions.controller.ErrorHandler;
+import ru.sorokin.exceptions.model.CriteriaParseException;
 import ru.sorokin.exceptions.model.StatisticParseException;
 
 import java.io.*;
@@ -34,9 +35,11 @@ public class ReadFileService implements ReadService {
             }
             reader.close();
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            errorHandler.createErrorFile(String.format("Not found file %s",  e.getMessage()));
+            throw new RuntimeException(String.format("Not found file %s",  e.getMessage()));
         } catch (IOException e) {
-            System.out.println("IOException!!!");
+            errorHandler.createErrorFile(String.format("Input output error %s",  e.getMessage()));
+            throw new RuntimeException(String.format("Input output error %s",  e.getMessage()));
         }
         return String.valueOf(builder);
     }
@@ -44,11 +47,12 @@ public class ReadFileService implements ReadService {
     @Override
     public Map<TypeRequest, String> parseStringToJson(String load) {
         Map<TypeRequest, String> response = new HashMap<>();
-        Object obj = null;
+        Object obj;
         try {
             obj = new JSONParser().parse(load);
         } catch (ParseException e) {
-            throw new RuntimeException(e);
+            errorHandler.createErrorFile(String.format("Parse error %s",  e.getMessage()));
+            throw new RuntimeException(String.format("Parse error %s",  e.getMessage()));
         }
         JSONObject jsonObject = (JSONObject) obj;
         JSONArray array = (JSONArray) jsonObject.get("criterias");
@@ -74,7 +78,12 @@ public class ReadFileService implements ReadService {
     public Criterias parseCriterias(String jsonString) {
         Gson gson = new Gson();
         System.out.println(jsonString);
-        return gson.fromJson(jsonString, Criterias.class);
+        Criterias criterias = gson.fromJson(jsonString, Criterias.class);
+        Criterias model = new Criterias();
+        if (criterias.equals(model)) {
+            throw new CriteriaParseException("Empty value for search");
+        }
+        return criterias;
     }
 
     public Statistics parseStatistics(String jsonString) {
@@ -87,6 +96,10 @@ public class ReadFileService implements ReadService {
                             (srs, typeOfSrs, context) -> new JsonPrimitive(srs.toString()))
                     .create();
             statistics = gson.fromJson(jsonString, Statistics.class);
+            if (statistics.getStartDate() == null || statistics.getEndDate() == null) {
+                errorHandler.createErrorFile("Empty value date for search");
+                throw new StatisticParseException("Empty value date for search");
+            }
         } catch (DateTimeParseException e) {
             errorHandler.createErrorFile(String.format("incorrect date format %s", e.getParsedString()));
             throw new StatisticParseException(String.format("incorrect date format %s", e.getParsedString()));
