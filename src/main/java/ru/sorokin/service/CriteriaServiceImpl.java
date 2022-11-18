@@ -1,14 +1,14 @@
 package ru.sorokin.service;
 
+import org.springframework.stereotype.Service;
 import ru.sorokin.model.dto.CustomerDto;
 
 import java.util.List;
-
+@Service
 public class CriteriaServiceImpl implements CriteriaService{
 
     @Override
     public List<CustomerDto> findCustomerByLastName(String lastName) {
-        System.out.println(lastName);
         return null;
     }
 
@@ -18,7 +18,7 @@ public class CriteriaServiceImpl implements CriteriaService{
     }
 
     @Override
-    public List<CustomerDto> findCustomerBetweenPrice(Double min, Double max) {
+    public List<CustomerDto> findCustomerBetweenPrice(Integer min, Integer max) {
         return null;
     }
 

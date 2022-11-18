@@ -9,7 +9,7 @@ public class Criterias {
     private String lastName;
     private String productName;
     private Integer minTimes;
-    private Double minExpenses;
-    private Double maxExpenses;
+    private Integer minExpenses;
+    private Integer maxExpenses;
     private Integer badCustomers;
 }

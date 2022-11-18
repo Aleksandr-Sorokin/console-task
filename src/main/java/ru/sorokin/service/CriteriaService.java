@@ -9,7 +9,7 @@ public interface CriteriaService {
 
     List<CustomerDto> findCustomerByProduct(String product, Integer limit);
 
-    List<CustomerDto> findCustomerBetweenPrice(Double min, Double max);
+    List<CustomerDto> findCustomerBetweenPrice(Integer min, Integer max);
 
     List<CustomerDto> findPassiveCustomer(Integer limit);
 }

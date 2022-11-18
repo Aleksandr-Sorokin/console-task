@@ -1,31 +1,37 @@
 package ru.sorokin.service;
 
 import com.google.gson.*;
+import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Service;
 import ru.sorokin.entity.Criterias;
 import ru.sorokin.entity.Statistics;
 import ru.sorokin.enums.TypeRequest;
 import ru.sorokin.exceptions.controller.ErrorHandler;
 import ru.sorokin.exceptions.model.CriteriaParseException;
 import ru.sorokin.exceptions.model.StatisticParseException;
+import ru.sorokin.model.Customer;
+import ru.sorokin.model.dto.CustomerDto;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
-
+@Service
+@RequiredArgsConstructor
 public class ReadFileService implements ReadService {
-    private ErrorHandler errorHandler = new ErrorHandler();
+    private final ErrorHandler errorHandler;
+    private final CustomerService customerService;
 
-    public ReadFileService() {
-    }
 
     @Override
     public String loadFromFile(File file) {
+        CustomerDto customerDto = new CustomerDto("Александр", "Сорокин");
+        //customerService.save(customerDto);
         StringBuilder builder = new StringBuilder();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(String.valueOf(file)));
@@ -77,7 +83,6 @@ public class ReadFileService implements ReadService {
 
     public Criterias parseCriterias(String jsonString) {
         Gson gson = new Gson();
-        System.out.println(jsonString);
         Criterias criterias = gson.fromJson(jsonString, Criterias.class);
         Criterias model = new Criterias();
         if (criterias.equals(model)) {

@@ -9,6 +9,6 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class Product {
     private Long id;
-    private final String title;
-    private final Double price;
+    private String title;
+    private Double price;
 }
