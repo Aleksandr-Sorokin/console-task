@@ -2,8 +2,6 @@ package ru.sorokin.model;
 
 import lombok.*;
 
-import javax.persistence.*;
-
 @Getter
 @Setter
 @RequiredArgsConstructor

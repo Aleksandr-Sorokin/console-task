@@ -1,19 +1,17 @@
 package ru.sorokin.model;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
-
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class CustomerPurchases {
-    private Long id;
-    private final Customer customer;
-    private final List<Purchases> purchases;
-    private final LocalDateTime dateTime;
+    private String name; //lastName firstName  Customer.class
+    private List<Purchases> purchases;
+    private Double totalExpenses;
 }

@@ -1,7 +1,7 @@
 package ru.sorokin.service;
 
 import org.springframework.stereotype.Service;
-import ru.sorokin.entity.time.VolumeWorkDayAndWeekEnd;
+import ru.sorokin.model.entity.time.VolumeWorkDayAndWeekEnd;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;

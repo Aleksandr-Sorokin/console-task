@@ -1,8 +1,9 @@
 package ru.sorokin.storage;
 
 import ru.sorokin.model.Customer;
-import ru.sorokin.model.dto.CustomerDto;
+import ru.sorokin.model.StatisticBetweenDate;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CustomerStorage {
@@ -13,4 +14,6 @@ public interface CustomerStorage {
     List<Customer> findCustomerBetweenPrice(Integer min, Integer max);
 
     List<Customer> findPassiveCustomer(Integer limit);
+
+    List<StatisticBetweenDate> findAllStatBetweenDate(List<LocalDate> dates);
 }

@@ -7,31 +7,26 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
-import ru.sorokin.entity.Criterias;
-import ru.sorokin.entity.Statistics;
 import ru.sorokin.enums.TypeRequest;
 import ru.sorokin.exceptions.controller.ErrorHandler;
 import ru.sorokin.exceptions.model.CriteriaParseException;
 import ru.sorokin.exceptions.model.StatisticParseException;
-import ru.sorokin.model.Customer;
-import ru.sorokin.model.dto.CustomerDto;
+import ru.sorokin.model.entity.Criterias;
+import ru.sorokin.model.entity.Statistics;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class ReadFileService implements ReadService {
     private final ErrorHandler errorHandler;
-    private final CustomerService customerService;
-
 
     @Override
     public String loadFromFile(File file) {
-        CustomerDto customerDto = new CustomerDto();
-        //customerService.save(customerDto);
         StringBuilder builder = new StringBuilder();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(String.valueOf(file)));
@@ -41,11 +36,11 @@ public class ReadFileService implements ReadService {
             }
             reader.close();
         } catch (FileNotFoundException e) {
-            errorHandler.createErrorFile(String.format("Not found file %s",  e.getMessage()));
-            throw new RuntimeException(String.format("Not found file %s",  e.getMessage()));
+            errorHandler.createErrorFile(String.format("Not found file %s", e.getMessage()));
+            throw new RuntimeException(String.format("Not found file %s", e.getMessage()));
         } catch (IOException e) {
-            errorHandler.createErrorFile(String.format("Input output error %s",  e.getMessage()));
-            throw new RuntimeException(String.format("Input output error %s",  e.getMessage()));
+            errorHandler.createErrorFile(String.format("Input output error %s", e.getMessage()));
+            throw new RuntimeException(String.format("Input output error %s", e.getMessage()));
         }
         return String.valueOf(builder);
     }
@@ -57,8 +52,8 @@ public class ReadFileService implements ReadService {
         try {
             obj = new JSONParser().parse(load);
         } catch (ParseException e) {
-            errorHandler.createErrorFile(String.format("Parse error %s",  e.getMessage()));
-            throw new RuntimeException(String.format("Parse error %s",  e.getMessage()));
+            errorHandler.createErrorFile(String.format("Parse error %s", e.getMessage()));
+            throw new RuntimeException(String.format("Parse error %s", e.getMessage()));
         }
         JSONObject jsonObject = (JSONObject) obj;
         JSONArray array = (JSONArray) jsonObject.get("criterias");
@@ -75,9 +70,12 @@ public class ReadFileService implements ReadService {
                     .replaceAll("GG,", "{")
                     .replaceAll(",GG", "}"));
             return response;
-        } else {
+        } else if (jsonObject != null) {
             response.put(TypeRequest.STAT, load);
             return response;
+        } else {
+            errorHandler.createErrorFile("Файл пуст или не правильные данные");
+            throw new StatisticParseException("Файл пуст или не правильные данные");
         }
     }
 
@@ -86,6 +84,7 @@ public class ReadFileService implements ReadService {
         Criterias criterias = gson.fromJson(jsonString, Criterias.class);
         Criterias model = new Criterias();
         if (criterias.equals(model)) {
+            errorHandler.createErrorFile("Empty value for search");
             throw new CriteriaParseException("Empty value for search");
         }
         return criterias;

@@ -5,23 +5,37 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import ru.sorokin.entity.Criterias;
-import ru.sorokin.entity.Statistics;
-import ru.sorokin.entity.json.*;
+import ru.sorokin.enums.TypeResponse;
+import ru.sorokin.exceptions.controller.ErrorHandler;
+import ru.sorokin.model.StatisticPurchases;
 import ru.sorokin.model.dto.CustomerDto;
+import ru.sorokin.model.dto.StatisticPurchasesDto;
+import ru.sorokin.model.entity.Criterias;
+import ru.sorokin.model.entity.Statistics;
+import ru.sorokin.model.entity.json.BadCustomerToJson;
+import ru.sorokin.model.entity.json.CustomerToJson;
+import ru.sorokin.model.entity.json.ExpensesToJson;
+import ru.sorokin.model.entity.json.ProductToJson;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CreateFileService {
-    private final ObjectMapper mapper;
+public class CreateFileService implements CreateService {
+    private final ObjectMapper objectMapper;
+    private final ModelMapper modelMapper;
     private final CustomerService customerService;
+    private final ErrorHandler errorHandler;
 
-
-    public String createFileCriteria(Criterias criterias){
+    @Override
+    public String createFileCriteria(Criterias criterias, File fileOutput) {
         Gson gson = new Gson();
         List<CustomerDto> customerLastName = new ArrayList<>();
         List<CustomerDto> customerProduct = new ArrayList<>();
@@ -57,20 +71,20 @@ public class CreateFileService {
         String jsonPassive = buildJsonForCriteria(gson.toJson(badCustomerToJson), customerPassive);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("{\"type\": \"search\",\"results\":[");
-        builder.append(jsonCustomer + "," +  jsonProduct + "," + jsonExpenses + "," + jsonPassive + "]}");
+        builder.append("{\"type\":\"" + TypeResponse.SEARCH + "\",\"results\":[");
+        builder.append(jsonCustomer + "," + jsonProduct + "," + jsonExpenses + "," + jsonPassive + "]}");
 
         try {
-            Object json = mapper.readValue(builder.toString().replaceAll("\\\\", ""), Object.class);
-            String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
-
-            System.out.println(result);
+            Object json = objectMapper.readValue(builder.toString().replaceAll("\\\\", ""), Object.class);
+            String result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+            createFileOutput(result, fileOutput);
             return result;
         } catch (JsonProcessingException e) {
-            log.error(String.valueOf(e.getStackTrace()));
+            errorHandler.createErrorFile(String.valueOf(e.getStackTrace()));
             throw new RuntimeException(e);
         }
     }
+
     private String buildJsonForCriteria(String criteria, List<CustomerDto> resultFromDB) {
         Gson gson = new Gson();
         StringBuilder builder = new StringBuilder();
@@ -85,11 +99,27 @@ public class CreateFileService {
         return String.valueOf(builder);
     }
 
-    public String createFileStat(Statistics statistics) {
-        ProductForStat productForStat;
-        CustomerPurchases customerPurchases;
-        TotalPurchases totalPurchases;
-
+    @Override
+    public String createFileStat(Statistics statistics, File fileOutput) {
+        StatisticPurchases statisticPurchases = customerService.findAllStatBetweenDate(statistics);
+        StatisticPurchasesDto statisticPurchasesDto = modelMapper.map(statisticPurchases, StatisticPurchasesDto.class);
+        try {
+            String result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(statisticPurchasesDto);
+            createFileOutput(result, fileOutput);
+        } catch (JsonProcessingException e) {
+            errorHandler.createErrorFile(e.getStackTrace().toString());
+            throw new RuntimeException(e);
+        }
         return null;
+    }
+
+    private void createFileOutput(String jsonString, File file) {
+        try {
+            FileWriter writer = new FileWriter(file);
+            writer.write(jsonString);
+            writer.close();
+        } catch (IOException e) {
+            errorHandler.createErrorFile("IOException данные не записались");
+        }
     }
 }

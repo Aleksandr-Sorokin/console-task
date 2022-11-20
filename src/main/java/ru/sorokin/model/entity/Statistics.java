@@ -1,4 +1,4 @@
-package ru.sorokin.entity;
+package ru.sorokin.model.entity;
 
 import lombok.Data;
 
