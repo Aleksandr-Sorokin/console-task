@@ -1,93 +1,93 @@
 # console-task
-Приложение принимает на вход два файла **input.json** и **output.json** или один файл **input.json** 
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ **input.json** пїЅ **output.json** пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ **input.json** 
 
-в **output.json** будут выгружены данные название **output.json** используется по умолчанию.
+пїЅ **output.json** пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ **output.json** пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
-Если вторым файлом указать **другоеназвание.json**, то выгружено будет в **другоеназвание.json**
+пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ **пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.json**, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ **пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.json**
 
-В файле input.json должны находиться следующие данные в формате json:
+пїЅ пїЅпїЅпїЅпїЅпїЅ input.json пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ json:
 
     {
     "criterias":[
-        {"lastName": "Иванов"}, 
-        {"productName": "Минеральная вода", "minTimes": 5},
+        {"lastName": "пїЅпїЅпїЅпїЅпїЅпїЅ"}, 
+        {"productName": "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ", "minTimes": 5},
         {"minExpenses": 112, "maxExpenses": 4000},  
         {"badCustomers": 3}
         ] 
     }
-**criterias** - параметр с которого начинается чтение данных
+**criterias** - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-**lastName** - lastName поиск в базе по фамилии
+**lastName** - lastName пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-**productName** - "productName" поиск в базе покупателя купившего продукт не менее **"minTimes"** раз
+**productName** - "productName" пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ **"minTimes"** пїЅпїЅпїЅ
 
-**minExpenses и maxExpenses** - поиск покупателей купивших на сумму в этом диапазоне minExpenses и maxExpenses
+**minExpenses пїЅ maxExpenses** - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ minExpenses пїЅ maxExpenses
 
-**badCustomers** - количество выводимых покупателей купивших меньше всего
+**badCustomers** - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-ИЛИ
+пїЅпїЅпїЅ
 
     {
         "startDate": "2020-01-14",
         "endDate": "2020-01-26"
     }
-**startDate и endDate** - период за который будет выгружена статистика без учета выходных дней
+**startDate пїЅ endDate** - пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
-**Файлы для тестов лежат в корне ***console-task\***
+**пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ ***console-task\***
 
     input.json
     inputstat.json
     inputstatwitherror.json
     inputwitherror.json
 
-**Файл input.json** - необходимо положить в корень проекта ***console-task/input.json***
+**пїЅпїЅпїЅпїЅ input.json** - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ***console-task/input.json***
 
-### Запуск программы ###
-На ПК необходим установленный **MAVEN** и **DOCKER** перейти в корень **\console-task**
+### пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ###
+пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ **MAVEN** пїЅ **DOCKER** пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ **\console-task**
 
-выполнить последовательно команды
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
     mvn package
     docker-compose up --build -d
     java -jar target/console-task-1.0-SNAPSHOT.jar input.json output.json
     java -jar target/console-task-1.0-SNAPSHOT.jar input.json
-Перейти в папку **\console-task** в консоле будет показан путь по которому расположен файл **output.json** в нем должны быть данные
-### команды для проверки разных ошибок ### 
+пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ **\console-task** пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ **output.json** пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+### пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ### 
 
     java -jar target/console-task-1.0-SNAPSHOT.jar inputstat.json
     java -jar target/console-task-1.0-SNAPSHOT.jar inputstatwitherror.json
     java -jar target/console-task-1.0-SNAPSHOT.jar inputwitherror.json
 
-### остановка образов docker-compose###
+### пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ docker-compose###
     docker-compose stop
     docker-compose down
 
-**для статистики**
+**пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ**
 
     {
     "type" : "STAT",
     "totalDays" : 9,
     "customers" : [ {
-    "name" : "Смирнов Петр",
+    "name" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ",
     "purchases" : [ {
-    "name" : "Апельсины",
+    "name" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
     "expenses" : 246.0
     }, {
-    "name" : "Мороженное \"Магнат\"",
+    "name" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ \"пїЅпїЅпїЅпїЅпїЅпїЅ\"",
     "expenses" : 63.0
     } ],
     "totalExpenses" : 309.0
     }, {
-    "name" : "Петров ??ван",
+    "name" : "пїЅпїЅпїЅпїЅпїЅпїЅ ??пїЅпїЅпїЅ",
     "purchases" : [ {
-    "name" : "Минеральная вода",
+    "name" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ",
     "expenses" : 270.0
     } ],
     "totalExpenses" : 270.0
     }, {
-    "name" : "Петров Александр",
+    "name" : "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
     "purchases" : [ {
-    "name" : "Минеральная вода",
+    "name" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ",
     "expenses" : 108.0
     } ],
     "totalExpenses" : 108.0
@@ -96,32 +96,32 @@
     "avgExpenses" : 229.0
     }
 
-**для поискового запроса**
+**пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ**
 
     {
     "type" : "SEARCH",
     "results" : [ {
     "criteria" : {
-    "lastName" : "?ванов"
+    "lastName" : "?пїЅпїЅпїЅпїЅпїЅ"
     },
     "results" : [ {
-    "firstName" : "Александр",
-    "lastName" : "?ванов"
+    "firstName" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+    "lastName" : "?пїЅпїЅпїЅпїЅпїЅ"
     }, {
-    "firstName" : "?ван",
-    "lastName" : "?ванов"
+    "firstName" : "?пїЅпїЅпїЅ",
+    "lastName" : "?пїЅпїЅпїЅпїЅпїЅ"
     } ]
     }, {
     "criteria" : {
-    "productName" : "Минеральная вода",
+    "productName" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ",
     "minTimes" : 5
     },
     "results" : [ {
-    "firstName" : "Александр",
-    "lastName" : "?ванов"
+    "firstName" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+    "lastName" : "?пїЅпїЅпїЅпїЅпїЅ"
     }, {
-    "firstName" : "?ван",
-    "lastName" : "Петров"
+    "firstName" : "?пїЅпїЅпїЅ",
+    "lastName" : "пїЅпїЅпїЅпїЅпїЅпїЅ"
     } ]
     }, {
     "criteria" : {
@@ -129,39 +129,39 @@
     "maxExpenses" : 4000
     },
     "results" : [ {
-    "firstName" : "Петр",
-    "lastName" : "Петров"
+    "firstName" : "пїЅпїЅпїЅпїЅ",
+    "lastName" : "пїЅпїЅпїЅпїЅпїЅпїЅ" 
     }, {
-    "firstName" : "?ван",
-    "lastName" : "?ванов"
+    "firstName" : "?пїЅпїЅпїЅ",
+    "lastName" : "?пїЅпїЅпїЅпїЅпїЅ"
     }, {
-    "firstName" : "?ван",
-    "lastName" : "Петров"
+    "firstName" : "?пїЅпїЅпїЅ",
+    "lastName" : "пїЅпїЅпїЅпїЅпїЅпїЅ"
     }, {
-    "firstName" : "Александр",
-    "lastName" : "?ванов"
+    "firstName" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+    "lastName" : "?пїЅпїЅпїЅпїЅпїЅ"
     }, {
-    "firstName" : "Петр",
-    "lastName" : "Смирнов"
+    "firstName" : "пїЅпїЅпїЅпїЅ",
+    "lastName" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ"
     } ]
     }, {
     "criteria" : {
     "badCustomers" : 3
     },
     "results" : [ {
-    "firstName" : "Александр",
-    "lastName" : "Петров"
+    "firstName" : "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ",
+    "lastName" : "пїЅпїЅпїЅпїЅпїЅпїЅ"
     }, {
-    "firstName" : "Петр",
-    "lastName" : "Петров"
+    "firstName" : "пїЅпїЅпїЅпїЅ",
+    "lastName" : "пїЅпїЅпїЅпїЅпїЅпїЅ"
     }, {
-    "firstName" : "?ван",
-    "lastName" : "?ванов"
+    "firstName" : "?пїЅпїЅпїЅ",
+    "lastName" : "?пїЅпїЅпїЅпїЅпїЅ"
     } ]
     } ]
     }
 
-### База данных ###
+### пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ ###
 
     DROP TABLE IF EXISTS purchase, product, customer;
     
@@ -192,24 +192,24 @@
     FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE CASCADE
     ); 
 
-### Данные для тестирования ###
+### пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ###
 
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (1, 'Александр', 'Иванов');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (2, 'Иван', 'Иванов');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (3, 'Иван', 'Петров');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (4, 'Петр', 'Петров');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (5, 'Петр', 'Смирнов');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (6, 'Александр', 'Смирнов');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (7, 'Александр', 'Петров');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (1, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅ');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (2, 'пїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅ');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (3, 'пїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅ');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (4, 'пїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅ');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (5, 'пїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (6, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅ');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (7, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 'пїЅпїЅпїЅпїЅпїЅпїЅ');
     
-    INSERT INTO product (product_id, title, price) VALUES (1, 'Минеральная вода', 54);
-    INSERT INTO product (product_id, title, price) VALUES (2, 'Мороженное "Магнат"', 63);
-    INSERT INTO product (product_id, title, price) VALUES (3, 'Вода 5-л', 49);
-    INSERT INTO product (product_id, title, price) VALUES (4, 'Хлеб белый', 35);
-    INSERT INTO product (product_id, title, price) VALUES (5, 'Хлеб черный', 42);
-    INSERT INTO product (product_id, title, price) VALUES (6, 'Яблоки', 150);
-    INSERT INTO product (product_id, title, price) VALUES (7, 'Апельсины', 123);
-    INSERT INTO product (product_id, title, price) VALUES (8, 'Молоко', 84);
+    INSERT INTO product (product_id, title, price) VALUES (1, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ', 54);
+    INSERT INTO product (product_id, title, price) VALUES (2, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ "пїЅпїЅпїЅпїЅпїЅпїЅ"', 63);
+    INSERT INTO product (product_id, title, price) VALUES (3, 'пїЅпїЅпїЅпїЅ 5-пїЅ', 49);
+    INSERT INTO product (product_id, title, price) VALUES (4, 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ', 35);
+    INSERT INTO product (product_id, title, price) VALUES (5, 'пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ', 42);
+    INSERT INTO product (product_id, title, price) VALUES (6, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 150);
+    INSERT INTO product (product_id, title, price) VALUES (7, 'пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ', 123);
+    INSERT INTO product (product_id, title, price) VALUES (8, 'пїЅпїЅпїЅпїЅпїЅпїЅ', 84);
     
     INSERT INTO purchase (purchase_id, customer_id, product_id, volume, purchase_date) VALUES (1, 1, 1, 7, '2020-01-13');
     INSERT INTO purchase (purchase_id, customer_id, product_id, volume, purchase_date) VALUES (2, 1, 2, 1, '2020-01-13');
