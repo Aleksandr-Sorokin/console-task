@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 public class PurchasesDto {
-    private final Customer customer;
-    private final List<Product> products;
-    private final LocalDateTime dateTime;
+    private Customer customer;
+    private List<Product> products;
+    private LocalDateTime dateTime;
 }

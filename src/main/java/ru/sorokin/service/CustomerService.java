@@ -6,9 +6,11 @@ import ru.sorokin.model.dto.CustomerDto;
 import java.util.List;
 
 public interface CustomerService {
-    void save(CustomerDto customerDto);
-    Customer findById(Long id);
-    Customer updateById(Long id, CustomerDto customerDto);
-    Customer findAll(List<Long> customers);
-    Customer delete(Long id);
+    List<CustomerDto> findCustomerByLastName(String lastName);
+
+    List<CustomerDto> findCustomerByProduct(String product, Integer limit);
+
+    List<CustomerDto> findCustomerBetweenPrice(Integer min, Integer max);
+
+    List<CustomerDto> findPassiveCustomer(Integer limit);
 }

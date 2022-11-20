@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 public class ProductDto {
-    private final String title;
-    private final Double price;
+    private String title;
+    private Double price;
 }

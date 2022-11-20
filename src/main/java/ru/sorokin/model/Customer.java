@@ -1,14 +1,14 @@
 package ru.sorokin.model;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @RequiredArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Customer {
     private Long id;
     private String firstName;

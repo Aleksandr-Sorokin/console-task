@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CreateFileService {
     private final ObjectMapper mapper;
-    private final CriteriaService criteriaService;
+    private final CustomerService customerService;
 
 
     public String createFileCriteria(Criterias criterias){
@@ -33,22 +33,22 @@ public class CreateFileService {
         BadCustomerToJson badCustomerToJson = null;
         if (criterias.getLastName() != null) {
             customerToJson = new CustomerToJson(criterias.getLastName());
-            customerLastName = criteriaService
+            customerLastName = customerService
                     .findCustomerByLastName(criterias.getLastName());
         }
         if (criterias.getProductName() != null && criterias.getMinTimes() != null) {
             productToJson = new ProductToJson(criterias.getProductName(), criterias.getMinTimes());
-            customerProduct = criteriaService
+            customerProduct = customerService
                     .findCustomerByProduct(criterias.getProductName(), criterias.getMinTimes());
         }
         if (criterias.getMinExpenses() != null && criterias.getMaxExpenses() != null) {
             expensesToJson = new ExpensesToJson(criterias.getMinExpenses(), criterias.getMaxExpenses());
-            customerBetweenPrice = criteriaService
+            customerBetweenPrice = customerService
                     .findCustomerBetweenPrice(criterias.getMinExpenses(), criterias.getMaxExpenses());
         }
         if (criterias.getBadCustomers() != null) {
             badCustomerToJson = new BadCustomerToJson(criterias.getBadCustomers());
-            customerPassive = criteriaService
+            customerPassive = customerService
                     .findPassiveCustomer(criterias.getBadCustomers());
         }
         String jsonCustomer = buildJsonForCriteria(gson.toJson(customerToJson), customerLastName);
@@ -63,6 +63,7 @@ public class CreateFileService {
         try {
             Object json = mapper.readValue(builder.toString().replaceAll("\\\\", ""), Object.class);
             String result = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(json);
+
             System.out.println(result);
             return result;
         } catch (JsonProcessingException e) {

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 public class ServiceTime {
-    public VolumeWorkDayAndWeekEnd weekEndDay(LocalDate startDate, LocalDate endDate) {
+    public VolumeWorkDayAndWeekEnd getWeekEndDay(LocalDate startDate, LocalDate endDate) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Calendar start = Calendar.getInstance();

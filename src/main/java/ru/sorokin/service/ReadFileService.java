@@ -30,7 +30,7 @@ public class ReadFileService implements ReadService {
 
     @Override
     public String loadFromFile(File file) {
-        CustomerDto customerDto = new CustomerDto("Александр", "Сорокин");
+        CustomerDto customerDto = new CustomerDto();
         //customerService.save(customerDto);
         StringBuilder builder = new StringBuilder();
         try {
