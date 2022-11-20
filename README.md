@@ -190,7 +190,7 @@
     FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE CASCADE,
     CONSTRAINT purchase_product_id_fk
     FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE CASCADE
-    );
+    ); 
 
 ### Данные для тестирования ###
 
