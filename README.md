@@ -1,93 +1,93 @@
 # console-task
-���������� ��������� �� ���� ��� ����� **input.json** � **output.json** ��� ���� ���� **input.json** 
+Приложение принимает на вход два файла **input.json** и **output.json** или один файл **input.json**
 
-� **output.json** ����� ��������� ������ �������� **output.json** ������������ �� ���������.
+в **output.json** будут выгружены данные название **output.json** используется по умолчанию.
 
-���� ������ ������ ������� **��������������.json**, �� ��������� ����� � **��������������.json**
+Если вторым файлом указать **другоеназвание.json**, то выгружено будет в **другоеназвание.json**
 
-� ����� input.json ������ ���������� ��������� ������ � ������� json:
+В файле input.json должны находиться следующие данные в формате json:
 
     {
     "criterias":[
-        {"lastName": "������"}, 
-        {"productName": "����������� ����", "minTimes": 5},
+        {"lastName": "Иванов"}, 
+        {"productName": "Минеральная вода", "minTimes": 5},
         {"minExpenses": 112, "maxExpenses": 4000},  
         {"badCustomers": 3}
         ] 
     }
-**criterias** - �������� � �������� ���������� ������ ������
+**criterias** - параметр с которого начинается чтение данных
 
-**lastName** - lastName ����� � ���� �� �������
+**lastName** - lastName поиск в базе по фамилии
 
-**productName** - "productName" ����� � ���� ���������� ��������� ������� �� ����� **"minTimes"** ���
+**productName** - "productName" поиск в базе покупателя купившего продукт не менее **"minTimes"** раз
 
-**minExpenses � maxExpenses** - ����� ����������� �������� �� ����� � ���� ��������� minExpenses � maxExpenses
+**minExpenses и maxExpenses** - поиск покупателей купивших на сумму в этом диапазоне minExpenses и maxExpenses
 
-**badCustomers** - ���������� ��������� ����������� �������� ������ �����
+**badCustomers** - количество выводимых покупателей купивших меньше всего
 
-���
+ИЛИ
 
     {
         "startDate": "2020-01-14",
         "endDate": "2020-01-26"
     }
-**startDate � endDate** - ������ �� ������� ����� ��������� ���������� ��� ����� �������� ����
+**startDate и endDate** - период за который будет выгружена статистика без учета выходных дней
 
-**����� ��� ������ ����� � ����� ***console-task\***
+**Файлы для тестов лежат в корне ***console-task\***
 
     input.json
     inputstat.json
     inputstatwitherror.json
     inputwitherror.json
 
-**���� input.json** - ���������� �������� � ������ ������� ***console-task/input.json***
+**Файл input.json** - необходимо положить в корень проекта ***console-task/input.json***
 
-### ������ ��������� ###
-�� �� ��������� ������������� **MAVEN** � **DOCKER** ������� � ������ **\console-task**
+### Запуск программы ###
+На ПК необходим установленный **MAVEN** и **DOCKER** перейти в корень **\console-task**
 
-��������� ��������������� �������
+выполнить последовательно команды
 
     mvn package
     docker-compose up --build -d
     java -jar target/console-task-1.0-SNAPSHOT.jar input.json output.json
     java -jar target/console-task-1.0-SNAPSHOT.jar input.json
-������� � ����� **\console-task** � ������� ����� ������� ���� �� �������� ���������� ���� **output.json** � ��� ������ ���� ������
-### ������� ��� �������� ������ ������ ### 
+Перейти в папку **\console-task** в консоле будет показан путь по которому расположен файл **output.json** в нем должны быть данные
+### команды для проверки разных ошибок ### 
 
     java -jar target/console-task-1.0-SNAPSHOT.jar inputstat.json
     java -jar target/console-task-1.0-SNAPSHOT.jar inputstatwitherror.json
     java -jar target/console-task-1.0-SNAPSHOT.jar inputwitherror.json
 
-### ��������� ������� docker-compose###
+### остановка образов docker-compose###
     docker-compose stop
     docker-compose down
 
-**��� ����������**
+**для статистики**
 
     {
     "type" : "STAT",
     "totalDays" : 9,
     "customers" : [ {
-    "name" : "������� ����",
+    "name" : "Смирнов Петр",
     "purchases" : [ {
-    "name" : "���������",
+    "name" : "Апельсины",
     "expenses" : 246.0
     }, {
-    "name" : "���������� \"������\"",
+    "name" : "Мороженное \"Магнат\"",
     "expenses" : 63.0
     } ],
     "totalExpenses" : 309.0
     }, {
-    "name" : "������ ??���",
+    "name" : "Петров ??ван",
     "purchases" : [ {
-    "name" : "����������� ����",
+    "name" : "Минеральная вода",
     "expenses" : 270.0
     } ],
     "totalExpenses" : 270.0
     }, {
-    "name" : "������ ���������",
+    "name" : "Петров Александр",
     "purchases" : [ {
-    "name" : "����������� ����",
+    "name" : "Минеральная вода",
     "expenses" : 108.0
     } ],
     "totalExpenses" : 108.0
@@ -96,32 +96,32 @@
     "avgExpenses" : 229.0
     }
 
-**��� ���������� �������**
+**для поискового запроса**
 
     {
     "type" : "SEARCH",
     "results" : [ {
     "criteria" : {
-    "lastName" : "?�����"
+    "lastName" : "Иванов"
     },
     "results" : [ {
-    "firstName" : "���������",
-    "lastName" : "?�����"
+    "firstName" : "Александр",
+    "lastName" : "Иванов"
     }, {
-    "firstName" : "?���",
-    "lastName" : "?�����"
+    "firstName" : "Иван",
+    "lastName" : "Иванов"
     } ]
     }, {
     "criteria" : {
-    "productName" : "����������� ����",
+    "productName" : "Минеральная вода",
     "minTimes" : 5
     },
     "results" : [ {
-    "firstName" : "���������",
-    "lastName" : "?�����"
+    "firstName" : "Александр",
+    "lastName" : "Иванов"
     }, {
-    "firstName" : "?���",
-    "lastName" : "������"
+    "firstName" : "Иван",
+    "lastName" : "Петров"
     } ]
     }, {
     "criteria" : {
@@ -129,56 +129,56 @@
     "maxExpenses" : 4000
     },
     "results" : [ {
-    "firstName" : "����",
-    "lastName" : "������" 
+    "firstName" : "Петр",
+    "lastName" : "Петров"
     }, {
-    "firstName" : "?���",
-    "lastName" : "?�����"
+    "firstName" : "Иван",
+    "lastName" : "Иванов"
     }, {
-    "firstName" : "?���",
-    "lastName" : "������"
+    "firstName" : "Иван",
+    "lastName" : "Петров"
     }, {
-    "firstName" : "���������",
-    "lastName" : "?�����"
+    "firstName" : "Александр",
+    "lastName" : "Иванов"
     }, {
-    "firstName" : "����",
-    "lastName" : "�������"
+    "firstName" : "Петр",
+    "lastName" : "Смирнов"
     } ]
     }, {
     "criteria" : {
     "badCustomers" : 3
     },
     "results" : [ {
-    "firstName" : "���������",
-    "lastName" : "������"
+    "firstName" : "Александр",
+    "lastName" : "Петров"
     }, {
-    "firstName" : "����",
-    "lastName" : "������"
+    "firstName" : "Петр",
+    "lastName" : "Петров"
     }, {
-    "firstName" : "?���",
-    "lastName" : "?�����"
+    "firstName" : "?ван",
+    "lastName" : "?ванов"
     } ]
     } ]
     }
 
-### ���� ������ ###
+### База данных ###
 
     DROP TABLE IF EXISTS purchase, product, customer;
-    
+
     CREATE TABLE IF NOT EXISTS customer
     (
     customer_id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     first_name VARCHAR(200) NOT NULL,
     last_name VARCHAR(200) NOT NULL
     );
-    
+
     CREATE TABLE IF NOT EXISTS product
     (
     product_id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     price DOUBLE PRECISION NOT NULL
     );
-    
+
     CREATE TABLE IF NOT EXISTS purchase
     (
     purchase_id BIGINT GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
@@ -190,27 +190,27 @@
     FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE CASCADE,
     CONSTRAINT purchase_product_id_fk
     FOREIGN KEY (product_id) REFERENCES product (product_id) ON DELETE CASCADE
-    ); 
+    );
 
-### ������ ��� ������������ ###
+### Данные для тестирования ###
 
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (1, '���������', '������');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (2, '����', '������');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (3, '����', '������');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (4, '����', '������');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (5, '����', '�������');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (6, '���������', '�������');
-    INSERT INTO customer (customer_id, first_name, last_name) VALUES (7, '���������', '������');
-    
-    INSERT INTO product (product_id, title, price) VALUES (1, '����������� ����', 54);
-    INSERT INTO product (product_id, title, price) VALUES (2, '���������� "������"', 63);
-    INSERT INTO product (product_id, title, price) VALUES (3, '���� 5-�', 49);
-    INSERT INTO product (product_id, title, price) VALUES (4, '���� �����', 35);
-    INSERT INTO product (product_id, title, price) VALUES (5, '���� ������', 42);
-    INSERT INTO product (product_id, title, price) VALUES (6, '������', 150);
-    INSERT INTO product (product_id, title, price) VALUES (7, '���������', 123);
-    INSERT INTO product (product_id, title, price) VALUES (8, '������', 84);
-    
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (1, 'Александр', 'Иванов');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (2, 'Иван', 'Иванов');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (3, 'Иван', 'Петров');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (4, 'Петр', 'Петров');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (5, 'Петр', 'Смирнов');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (6, 'Александр', 'Смирнов');
+    INSERT INTO customer (customer_id, first_name, last_name) VALUES (7, 'Александр', 'Петров');
+
+    INSERT INTO product (product_id, title, price) VALUES (1, 'Минеральная вода', 54);
+    INSERT INTO product (product_id, title, price) VALUES (2, 'Мороженное "Магнат"', 63);
+    INSERT INTO product (product_id, title, price) VALUES (3, 'Вода 5-л', 49);
+    INSERT INTO product (product_id, title, price) VALUES (4, 'Хлеб белый', 35);
+    INSERT INTO product (product_id, title, price) VALUES (5, 'Хлеб черный', 42);
+    INSERT INTO product (product_id, title, price) VALUES (6, 'Яблоки', 150);
+    INSERT INTO product (product_id, title, price) VALUES (7, 'Апельсины', 123);
+    INSERT INTO product (product_id, title, price) VALUES (8, 'Молоко', 84);
+
     INSERT INTO purchase (purchase_id, customer_id, product_id, volume, purchase_date) VALUES (1, 1, 1, 7, '2020-01-13');
     INSERT INTO purchase (purchase_id, customer_id, product_id, volume, purchase_date) VALUES (2, 1, 2, 1, '2020-01-13');
     INSERT INTO purchase (purchase_id, customer_id, product_id, volume, purchase_date) VALUES (3, 1, 3, 5, '2020-01-14');
