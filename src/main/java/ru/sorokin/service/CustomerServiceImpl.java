@@ -3,6 +3,7 @@ package ru.sorokin.service;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.sorokin.config.ModelMapperUtil;
 import ru.sorokin.enums.TypeResponse;
 import ru.sorokin.exceptions.controller.ErrorHandler;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class CustomerServiceImpl implements CustomerService {
     private final ModelMapper mapper;
     private final CustomerStorage customerStorage;
