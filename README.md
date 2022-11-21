@@ -61,7 +61,7 @@
 ### остановка образов docker-compose###
     docker-compose stop
     docker-compose down
-
+### Правильный ответ для : ###
 **для статистики**
 
     {
@@ -155,8 +155,8 @@
     "firstName" : "Петр",
     "lastName" : "Петров"
     }, {
-    "firstName" : "?ван",
-    "lastName" : "?ванов"
+    "firstName" : "Иван",
+    "lastName" : "Иванов"
     } ]
     } ]
     }
